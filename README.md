@@ -41,15 +41,20 @@ CL-USER> (list-set-difference '(1 2 3 4) '(3 4 5 6))
 ## Лістинг функції remove-seconds-and-reverse
 ```lisp
 (defun remove-seconds-and-reverse (list)
-"Constructs list with every other element removed and then reversed"
+  ;; Створює список, видаляючи кожен другий елемент і потім розвертаючи порядок
   (cond
+    ;; Якщо список порожній, повертає `nil` (базовий випадок)
     ((null list) nil)
+    ;; Якщо список має менше трьох елементів, повертає перший елемент (базовий випадок)
     ((null (third list)) (list (first list)))
+    ;; Інакше викликає рекурсію для решти списку (починаючи з третього елемента),
+    ;; додаючи перший елемент поточного списку до кінця результату
     (t (append (remove-seconds-and-reverse (nthcdr 2 list)) (list (first list))))
-    ;; or destructive method
+    ;; Або використовуйте деструктивний метод для з'єднання (не створює новий список)
     ;; (t (nconc (remove-seconds-and-reverse (nthcdr 2 list)) (list (first list))))
   )
 )
+
 ```
 ### Тестові набори
 ```lisp
